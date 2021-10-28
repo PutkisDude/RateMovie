@@ -12,12 +12,14 @@ public class Rating {
 	@GeneratedValue(strategy=GenerationType.IDENTITY)
 	private Long ratingId;
 	
-	private User user;
-	private Movie movie;
+//	private User user;
+//	private Movie movie;
+	
+	
 	private int rating;
 	
 	public Rating(Movie movie, int rating) {
-		this.movie = movie;
+//		this.movie = movie;
 		this.rating = rating;
 	}
 	
@@ -31,18 +33,15 @@ public class Rating {
 	public void setRatingId(long ratingId) {
 		this.ratingId = ratingId;
 	}
-	public User getUser() {
-		return user;
-	}
-	public void setUser(User user) {
-		this.user = user;
-	}
-	public Movie getMovie() {
-		return movie;
-	}
-	public void setMovie(Movie movie) {
-		this.movie = movie;
-	}
+
+	/*
+	 * public User getUser() { return user; } public void setUser(User user) {
+	 * this.user = user; }
+	 */
+	/*
+	 * public Movie getMovie() { return movie; } public void setMovie(Movie movie) {
+	 * this.movie = movie; }
+	 */
 	public int getRating() {
 		return rating;
 	}
