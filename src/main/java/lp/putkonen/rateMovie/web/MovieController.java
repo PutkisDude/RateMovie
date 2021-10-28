@@ -11,11 +11,13 @@ import lp.putkonen.rateMovie.domain.MovieRepository;
 @Controller
 public class MovieController {
 
-	@Autowired
-	private MovieRepository movieRepo;
-	@Autowired
-	private GenreRepository genreRepo;
 	
+	  @Autowired 
+	  private MovieRepository movieRepo;
+	  
+	  @Autowired private 
+	  GenreRepository genreRepo;
+	 
 	@GetMapping("*")
 	public String index(Model model) {
 		return "index";

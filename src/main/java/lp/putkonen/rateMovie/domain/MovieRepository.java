@@ -1,4 +1,4 @@
-package lp.putkonen.domain;
+package lp.putkonen.rateMovie.domain;
 
 import org.springframework.data.repository.CrudRepository;
 
