@@ -1,43 +1,52 @@
 package lp.putkonen.rateMovie.domain;
 
+import java.util.ArrayList;
+import java.util.List;
+import java.util.Set;
+
+import javax.persistence.Column;
 import javax.persistence.Entity;
 import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
 import javax.persistence.Id;
 import javax.persistence.JoinColumn;
+import javax.persistence.JoinTable;
+import javax.persistence.ManyToMany;
 import javax.persistence.ManyToOne;
+import javax.persistence.Table;
 
 import com.fasterxml.jackson.annotation.JsonIgnoreProperties;
 
 @Entity
+@Table(name="Movie")
 public class Movie {
 
 	@Id
 	@GeneratedValue(strategy=GenerationType.IDENTITY)
-	private long movieId;
-	
-	@ManyToOne
-	@JoinColumn(name = "genreId")
-	@JsonIgnoreProperties("genres")
-	private Genre genre;
-
-	
+	@Column(name = "id")
+	private long movieId;	
 	private String title;
 	private int year;
 	private int length;
 	
+	@ManyToMany
+	@JoinTable(
+			name="movie_genres",
+	joinColumns= @JoinColumn(name = "movie_id"),
+	inverseJoinColumns = @JoinColumn(name = "genre_id"))
+	private List<Genre> movieGenres = new ArrayList<>();
+	
 	public Movie() {
-		this.title = null;
-		this.genre = null;
-		this.year = 0;
-		this.length = 0;
 	}
 	
-	public Movie(String title, Genre genre, int year, int length) {
+	public Movie(String title, int year, int length) {
 		this.title = title;
-		this.genre = genre;
 		this.year = year;
 		this.length = length;
+	}
+	
+	public void addGenre(Genre genre) {
+		movieGenres.add(genre);
 	}
 	
 	public long getMovieId() {
@@ -52,12 +61,7 @@ public class Movie {
 	public void setTitle(String title) {
 		this.title = title;
 	}
-	public Genre getGenre() {
-		return genre;
-	}
-	public void setGenre(Genre genre) {
-		this.genre = genre;
-	}
+
 	public int getYear() {
 		return year;
 	}
