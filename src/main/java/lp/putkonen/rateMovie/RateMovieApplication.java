@@ -8,7 +8,9 @@ import org.springframework.context.annotation.Bean;
 import lp.putkonen.rateMovie.domain.Genre;
 import lp.putkonen.rateMovie.domain.GenreRepository;
 import lp.putkonen.rateMovie.domain.Movie;
+import lp.putkonen.rateMovie.domain.MovieRatingRepository;
 import lp.putkonen.rateMovie.domain.MovieRepository;
+import lp.putkonen.rateMovie.domain.Rating;
 import lp.putkonen.rateMovie.domain.RatingRepository;
 import lp.putkonen.rateMovie.domain.User;
 import lp.putkonen.rateMovie.domain.UserRepository;
@@ -21,7 +23,7 @@ public class RateMovieApplication {
 	}
 	
 	@Bean
-	public CommandLineRunner oneliner (GenreRepository genreRepo, MovieRepository movieRepo, RatingRepository rateRepo, UserRepository userRepo ) {
+	public CommandLineRunner oneliner (GenreRepository genreRepo, MovieRepository movieRepo, RatingRepository rateRepo, MovieRatingRepository mvrateRepo, UserRepository userRepo ) {
 		return (args) -> {
 			
 			User user1 = new User("John Doe", "pswd");
@@ -47,7 +49,7 @@ public class RateMovieApplication {
 			
 			lit.addGenre(drama);
 			lit.addGenre(comedy);
-			
+						
 			nightmareBefore.addGenre(musical);
 			nightmareBefore.addGenre(animation);
 			nightmareBefore.addGenre(comedy);
@@ -55,7 +57,12 @@ public class RateMovieApplication {
 			movieRepo.save(lit);
 			movieRepo.save(nightmareBefore);
 			
-//			rateRepo.save(user1, lit, 5, "Great Movie");
+			Rating rate1 = new Rating(5, "Great Movie");
+			Rating rate2 = new Rating(4, "Awsum");
+			
+			rateRepo.save(rate1);
+			rateRepo.save(rate2);
+			
 		};
 	}
 

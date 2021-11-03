@@ -2,8 +2,7 @@ package lp.putkonen.rateMovie.domain;
 
 import java.util.ArrayList;
 import java.util.List;
-import java.util.Set;
-
+import javax.persistence.CascadeType;
 import javax.persistence.Column;
 import javax.persistence.Entity;
 import javax.persistence.GeneratedValue;
@@ -12,10 +11,8 @@ import javax.persistence.Id;
 import javax.persistence.JoinColumn;
 import javax.persistence.JoinTable;
 import javax.persistence.ManyToMany;
-import javax.persistence.ManyToOne;
+import javax.persistence.OneToMany;
 import javax.persistence.Table;
-
-import com.fasterxml.jackson.annotation.JsonIgnoreProperties;
 
 @Entity
 @Table(name="Movie")
@@ -36,6 +33,8 @@ public class Movie {
 	inverseJoinColumns = @JoinColumn(name = "genre_id"))
 	private List<Genre> movieGenres = new ArrayList<>();
 	
+    @OneToMany(mappedBy = "movie", cascade = {CascadeType.PERSIST, CascadeType.MERGE})
+    private List<MovieRating> movieRatings = new ArrayList<>();
 	
 	
 	public Movie() {
@@ -50,7 +49,7 @@ public class Movie {
 	public void addGenre(Genre genre) {
 		movieGenres.add(genre);
 	}
-	
+		
 	public long getMovieId() {
 		return movieId;
 	}
@@ -75,5 +74,21 @@ public class Movie {
 	}
 	public void setLength(int length) {
 		this.length = length;
+	}
+
+	public List<Genre> getMovieGenres() {
+		return movieGenres;
+	}
+
+	public void setMovieGenres(List<Genre> movieGenres) {
+		this.movieGenres = movieGenres;
+	}
+
+	public List<MovieRating> getMovieRatings() {
+		return movieRatings;
+	}
+
+	public void setMovieRatings(List<MovieRating> movieRatings) {
+		this.movieRatings = movieRatings;
 	}
 }

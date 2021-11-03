@@ -1,44 +1,50 @@
 package lp.putkonen.rateMovie.domain;
 
-import java.util.ArrayList;
 import java.util.List;
-
-import javax.persistence.EmbeddedId;
+import javax.persistence.CascadeType;
 import javax.persistence.Entity;
 import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
 import javax.persistence.Id;
-import javax.persistence.JoinColumn;
-import javax.persistence.JoinTable;
-import javax.persistence.ManyToMany;
-import javax.persistence.MapsId;
+import javax.persistence.OneToMany;
 import javax.persistence.Table;
 
 @Entity
 @Table(name = "Rating")
 public class Rating {
 
-	@EmbeddedId
-	MovieRatingKey id;
-	private int rating;
+	@Id
+	@GeneratedValue(strategy=GenerationType.IDENTITY)
+	private Long ratingId;
+	private double rating;
 	private String comment;
 	
-	@ManyToMany
-	@MapsId("userId")
-	@JoinColumn(name = "user_id")
-	List<User> userReviews = new ArrayList<>();
-
-	@ManyToMany
-	@MapsId("movie_id")
-	List<Movie> movies = new ArrayList<>();
-
+    @OneToMany(mappedBy = "rating", cascade = {CascadeType.PERSIST, CascadeType.MERGE})
+    private List<MovieRating> movieRatings;
 	
+	
+	public Rating() {
+		
+	}
+	
+	public Rating(double rating, String comment) {
+		this.rating = rating;
+		this.comment = comment;
+	}
+	
+	public Long getRatingId() {
+		return ratingId;
+	}
 
-	public int getRating() {
+	public void setRatingId(Long ratingId) {
+		this.ratingId = ratingId;
+	}
+
+	public double getRating() {
 		return rating;
 	}
 
-	public void setRating(int rating) {
+	public void setRating(double rating) {
 		this.rating = rating;
 	}
 
@@ -50,21 +56,17 @@ public class Rating {
 		this.comment = comment;
 	}
 
-	public List<User> getUsers() {
-		return userReviews;
+	public List<MovieRating> getMovieRatings() {
+		return movieRatings;
 	}
 
-	public void setUsers(List<User> users) {
-		this.userReviews = users;
+	public void setMovieRatings(List<MovieRating> movieRatings) {
+		this.movieRatings = movieRatings;
 	}
 
-	public MovieRatingKey getId() {
-		return id;
+	@Override
+	public String toString() {
+		return "Rating [ratingId=" + ratingId + ", rating=" + rating + ", comment=" + comment + "]";
 	}
-
-	public void setId(MovieRatingKey id) {
-		this.id = id;
-	}
-
-		
+	
 }
