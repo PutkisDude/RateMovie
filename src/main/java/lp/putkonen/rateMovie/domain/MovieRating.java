@@ -3,6 +3,7 @@ package lp.putkonen.rateMovie.domain;
 import javax.persistence.CascadeType;
 import javax.persistence.Entity;
 import javax.persistence.GeneratedValue;
+import javax.persistence.GenerationType;
 import javax.persistence.Id;
 import javax.persistence.JoinColumn;
 import javax.persistence.ManyToOne;
@@ -11,7 +12,7 @@ import javax.persistence.ManyToOne;
 public class MovieRating {
 
 	@Id
-	@GeneratedValue
+	@GeneratedValue(strategy=GenerationType.IDENTITY)
 	private Long id;
 	
 	@ManyToOne(cascade = {CascadeType.PERSIST, CascadeType.MERGE})
@@ -25,6 +26,17 @@ public class MovieRating {
 	@ManyToOne(cascade = {CascadeType.PERSIST, CascadeType.MERGE})
 	@JoinColumn(name = "rating_id")
 	private Rating rating;
+	
+	public MovieRating() {
+		
+	}
+	
+	public MovieRating(User user, Movie movie, Rating rating) {
+		this.user = user;
+		this.movie = movie;
+		this.rating = rating;
+	}
+	
 
 	public User getUser() {
 		return user;
@@ -56,5 +68,11 @@ public class MovieRating {
 
 	public void setId(Long id) {
 		this.id = id;
+	}
+
+
+	@Override
+	public String toString() {
+		return "MovieRating [id=" + id + ", user=" + user + ", movie=" + movie + ", rating=" + rating + "]";
 	}
 }

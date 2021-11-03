@@ -1,13 +1,17 @@
 package lp.putkonen.rateMovie.domain;
 
 import java.util.List;
-import javax.persistence.CascadeType;
 import javax.persistence.Entity;
 import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
 import javax.persistence.Id;
+import javax.persistence.JoinColumn;
+import javax.persistence.ManyToOne;
 import javax.persistence.OneToMany;
 import javax.persistence.Table;
+
+import com.fasterxml.jackson.annotation.JsonIgnoreProperties;
+
 
 @Entity
 @Table(name = "Rating")
@@ -16,18 +20,29 @@ public class Rating {
 	@Id
 	@GeneratedValue(strategy=GenerationType.IDENTITY)
 	private Long ratingId;
-	private double rating;
+	private int rating;
 	private String comment;
 	
-    @OneToMany(mappedBy = "rating", cascade = {CascadeType.PERSIST, CascadeType.MERGE})
+    @ManyToOne 
+    @JoinColumn(name = "user_id")
+    @JsonIgnoreProperties ("users")
+    private User user;
+    
+    @ManyToOne 
+    @JoinColumn(name = "movie_id")
+    @JsonIgnoreProperties ("movies") 
+    private Movie movie;
+	
+    @OneToMany(mappedBy = "rating")
     private List<MovieRating> movieRatings;
-	
-	
+    
 	public Rating() {
 		
 	}
 	
-	public Rating(double rating, String comment) {
+	public Rating(User user, Movie movie, int rating, String comment) {
+		this.movie = movie;
+		this.user = user;
 		this.rating = rating;
 		this.comment = comment;
 	}
@@ -40,11 +55,11 @@ public class Rating {
 		this.ratingId = ratingId;
 	}
 
-	public double getRating() {
+	public int getRating() {
 		return rating;
 	}
 
-	public void setRating(double rating) {
+	public void setRating(int rating) {
 		this.rating = rating;
 	}
 
@@ -64,9 +79,26 @@ public class Rating {
 		this.movieRatings = movieRatings;
 	}
 
+	public User getUser() {
+		return user;
+	}
+
+	public void setUser(User user) {
+		this.user = user;
+	}
+
+	public Movie getMovie() {
+		return movie;
+	}
+
+	public void setMovie(Movie movie) {
+		this.movie = movie;
+	}
+
 	@Override
 	public String toString() {
-		return "Rating [ratingId=" + ratingId + ", rating=" + rating + ", comment=" + comment + "]";
+		return "Rating [ratingId=" + ratingId + ", rating=" + rating + ", comment=" + comment + ", user=" + user
+				+ ", movie=" + movie + "]";
 	}
 	
 }

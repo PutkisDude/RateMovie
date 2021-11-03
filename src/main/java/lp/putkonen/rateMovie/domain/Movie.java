@@ -14,6 +14,7 @@ import javax.persistence.ManyToMany;
 import javax.persistence.OneToMany;
 import javax.persistence.Table;
 
+
 @Entity
 @Table(name="Movie")
 public class Movie {
@@ -33,8 +34,11 @@ public class Movie {
 	inverseJoinColumns = @JoinColumn(name = "genre_id"))
 	private List<Genre> movieGenres = new ArrayList<>();
 	
-    @OneToMany(mappedBy = "movie", cascade = {CascadeType.PERSIST, CascadeType.MERGE})
+    @OneToMany(mappedBy = "rating")
     private List<MovieRating> movieRatings = new ArrayList<>();
+    
+	@OneToMany(cascade = CascadeType.ALL, mappedBy = "rating")
+	private List<Rating> ratings;
 	
 	
 	public Movie() {

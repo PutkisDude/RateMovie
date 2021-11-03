@@ -23,7 +23,7 @@ public class RateMovieApplication {
 	}
 	
 	@Bean
-	public CommandLineRunner oneliner (GenreRepository genreRepo, MovieRepository movieRepo, RatingRepository rateRepo, MovieRatingRepository mvrateRepo, UserRepository userRepo ) {
+	public <S> CommandLineRunner oneliner (GenreRepository genreRepo, MovieRepository movieRepo, RatingRepository rateRepo, MovieRatingRepository mvrateRepo, UserRepository userRepo ) {
 		return (args) -> {
 			
 			User user1 = new User("John Doe", "pswd");
@@ -46,7 +46,14 @@ public class RateMovieApplication {
 			
 			Movie nightmareBefore = new Movie("Nightmare Before Christmas", 1993, 76);
 			Movie lit = new Movie("Lost in Translation", 2003, 101);
+			Movie mov = new Movie("Lost in Translation", 2003, 101);
+			Movie mov2 = new Movie("Lost in Translation", 2003, 101);
+			Movie mov3 = new Movie("Lost in Translation", 2003, 101);
 			
+			movieRepo.save(mov);
+			movieRepo.save(mov2);
+			movieRepo.save(mov3);
+		
 			lit.addGenre(drama);
 			lit.addGenre(comedy);
 						
@@ -57,13 +64,17 @@ public class RateMovieApplication {
 			movieRepo.save(lit);
 			movieRepo.save(nightmareBefore);
 			
-			Rating rate1 = new Rating(5, "Great Movie");
-			Rating rate2 = new Rating(4, "Awsum");
+			rateRepo.save(new Rating(user1, lit, 5, "Great Movie"));
+			rateRepo.save(new Rating(user2, mov3, 4, "Awsum"));
+			rateRepo.save(new Rating(user1, mov, 1, "Shiet"));
+			rateRepo.save(new Rating(user2, mov2, 4, "Awsum"));
+			rateRepo.save(new Rating(user2, mov, 4, "Oh ye"));
+			rateRepo.save(new Rating(user2, lit, 5, "Awsum"));
 			
-			rateRepo.save(rate1);
-			rateRepo.save(rate2);
-			
+
+					
+//			MovieRating rating = new MovieRating(user1, lit, rate1);
+//			rateRepo.save(rating);
 		};
 	}
-
 }
