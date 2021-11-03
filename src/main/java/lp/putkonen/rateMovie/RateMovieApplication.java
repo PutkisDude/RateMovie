@@ -10,6 +10,8 @@ import lp.putkonen.rateMovie.domain.GenreRepository;
 import lp.putkonen.rateMovie.domain.Movie;
 import lp.putkonen.rateMovie.domain.MovieRepository;
 import lp.putkonen.rateMovie.domain.RatingRepository;
+import lp.putkonen.rateMovie.domain.User;
+import lp.putkonen.rateMovie.domain.UserRepository;
 
 @SpringBootApplication
 public class RateMovieApplication {
@@ -19,8 +21,14 @@ public class RateMovieApplication {
 	}
 	
 	@Bean
-	public CommandLineRunner oneliner (GenreRepository genreRepo, MovieRepository movieRepo, RatingRepository rateRepo ) {
+	public CommandLineRunner oneliner (GenreRepository genreRepo, MovieRepository movieRepo, RatingRepository rateRepo, UserRepository userRepo ) {
 		return (args) -> {
+			
+			User user1 = new User("John Doe", "pswd");
+			User user2 = new User("Jane Doe", "pswd2");
+			userRepo.save(user1);
+			userRepo.save(user2);
+			
 			Genre horror = new Genre("Horror");
 			Genre fantasy = new Genre("Fantasy");
 			Genre comedy = new Genre("Comedy");
@@ -46,10 +54,8 @@ public class RateMovieApplication {
 			
 			movieRepo.save(lit);
 			movieRepo.save(nightmareBefore);
-
 			
-
-			
+//			rateRepo.save(user1, lit, 5, "Great Movie");
 		};
 	}
 
