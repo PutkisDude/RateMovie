@@ -20,7 +20,7 @@ public class MovieController {
 	  
 	 
 	@GetMapping("*")
-	public String index(Model model) {
-		return "index";
+	public String movies(Model model) {
+		return "";
 	}
 }

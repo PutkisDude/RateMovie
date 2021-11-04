@@ -4,6 +4,13 @@
 <title>Rate Movie</title>
 </head>
 <body>
-<p>Test</p>
+	<table>
+	<tr>
+	<th></th>
+	</tr>
+	<tr th:each="rating : ${ratings}">
+	<td th:text=${rating.movie.title}></td>
+	</tr>
+	</table>
 </body>
 </html>

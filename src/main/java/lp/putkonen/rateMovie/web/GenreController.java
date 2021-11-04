@@ -21,4 +21,10 @@ public class GenreController {
 	public @ResponseBody List<Genre> index() {
 		return (List<Genre>) genreRepo.findAll();
 	}
+	
+	@GetMapping("/genres")
+	public String genreList(Model model) {
+		model.addAttribute("genres", genreRepo.findAll());
+		return "genres";
+	}
 }

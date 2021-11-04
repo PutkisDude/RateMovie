@@ -1,13 +1,12 @@
 package lp.putkonen.rateMovie.domain;
 
-import java.util.List;
+import java.time.LocalDateTime;
 import javax.persistence.Entity;
 import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
 import javax.persistence.Id;
 import javax.persistence.JoinColumn;
 import javax.persistence.ManyToOne;
-import javax.persistence.OneToMany;
 import javax.persistence.Table;
 
 import com.fasterxml.jackson.annotation.JsonIgnoreProperties;
@@ -22,6 +21,7 @@ public class Rating {
 	private Long ratingId;
 	private int rating;
 	private String comment;
+	private LocalDateTime localDateTime;
 	
     @ManyToOne 
     @JoinColumn(name = "user_id")
@@ -90,6 +90,14 @@ public class Rating {
 	public String toString() {
 		return "Rating [ratingId=" + ratingId + ", rating=" + rating + ", comment=" + comment + ", user=" + user
 				+ ", movie=" + movie + "]";
+	}
+
+	public LocalDateTime getLocalDateTime() {
+		return localDateTime;
+	}
+
+	public void setLocalDateTime(LocalDateTime localDateTime) {
+		this.localDateTime = localDateTime;
 	}
 	
 }

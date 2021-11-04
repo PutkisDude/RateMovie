@@ -97,4 +97,11 @@ public class Movie {
 		this.ratings = ratings;
 	}
 
+	@Override
+	public String toString() {
+		return "Movie [movieId=" + movieId + ", title=" + title + ", year=" + year + ", length=" + length + "]";
+	}
+
+
+
 }
