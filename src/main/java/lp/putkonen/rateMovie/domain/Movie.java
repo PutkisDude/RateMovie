@@ -34,8 +34,6 @@ public class Movie {
 	inverseJoinColumns = @JoinColumn(name = "genre_id"))
 	private List<Genre> movieGenres = new ArrayList<>();
 	
-    @OneToMany(mappedBy = "rating")
-    private List<MovieRating> movieRatings = new ArrayList<>();
     
 	@OneToMany(cascade = CascadeType.ALL, mappedBy = "rating")
 	private List<Rating> ratings;
@@ -88,11 +86,4 @@ public class Movie {
 		this.movieGenres = movieGenres;
 	}
 
-	public List<MovieRating> getMovieRatings() {
-		return movieRatings;
-	}
-
-	public void setMovieRatings(List<MovieRating> movieRatings) {
-		this.movieRatings = movieRatings;
-	}
 }

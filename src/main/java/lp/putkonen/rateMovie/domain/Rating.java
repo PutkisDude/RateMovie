@@ -33,8 +33,6 @@ public class Rating {
     @JsonIgnoreProperties ("movies") 
     private Movie movie;
 	
-    @OneToMany(mappedBy = "rating")
-    private List<MovieRating> movieRatings;
     
 	public Rating() {
 		
@@ -71,13 +69,6 @@ public class Rating {
 		this.comment = comment;
 	}
 
-	public List<MovieRating> getMovieRatings() {
-		return movieRatings;
-	}
-
-	public void setMovieRatings(List<MovieRating> movieRatings) {
-		this.movieRatings = movieRatings;
-	}
 
 	public User getUser() {
 		return user;

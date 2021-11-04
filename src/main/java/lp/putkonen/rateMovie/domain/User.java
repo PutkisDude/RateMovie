@@ -23,9 +23,7 @@ public class User {
 	private String name;
 	private String password;
 	
-    @OneToMany(mappedBy = "rating")
-    private List<MovieRating> movieRatings = new ArrayList<>();
-	
+
 	@OneToMany(cascade = CascadeType.ALL, mappedBy = "rating")
 	private List<Rating> ratings;
 		

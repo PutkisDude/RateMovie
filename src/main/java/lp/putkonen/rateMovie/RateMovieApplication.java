@@ -8,7 +8,6 @@ import org.springframework.context.annotation.Bean;
 import lp.putkonen.rateMovie.domain.Genre;
 import lp.putkonen.rateMovie.domain.GenreRepository;
 import lp.putkonen.rateMovie.domain.Movie;
-import lp.putkonen.rateMovie.domain.MovieRatingRepository;
 import lp.putkonen.rateMovie.domain.MovieRepository;
 import lp.putkonen.rateMovie.domain.Rating;
 import lp.putkonen.rateMovie.domain.RatingRepository;
@@ -23,7 +22,7 @@ public class RateMovieApplication {
 	}
 	
 	@Bean
-	public <S> CommandLineRunner oneliner (GenreRepository genreRepo, MovieRepository movieRepo, RatingRepository rateRepo, MovieRatingRepository mvrateRepo, UserRepository userRepo ) {
+	public <S> CommandLineRunner oneliner (GenreRepository genreRepo, MovieRepository movieRepo, RatingRepository rateRepo, UserRepository userRepo ) {
 		return (args) -> {
 			
 			User user1 = new User("John Doe", "pswd");
@@ -71,10 +70,6 @@ public class RateMovieApplication {
 			rateRepo.save(new Rating(user2, mov, 4, "Oh ye"));
 			rateRepo.save(new Rating(user2, lit, 5, "Awsum"));
 			
-
-					
-//			MovieRating rating = new MovieRating(user1, lit, rate1);
-//			rateRepo.save(rating);
 		};
 	}
 }
