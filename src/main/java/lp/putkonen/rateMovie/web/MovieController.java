@@ -15,8 +15,9 @@ public class MovieController {
 	  @Autowired 
 	  private MovieRepository movieRepo;
 	  
-	  @Autowired private 
-	  GenreRepository genreRepo;
+	  @Autowired
+	  private GenreRepository genreRepo;
+	  
 	 
 	@GetMapping("*")
 	public String index(Model model) {
