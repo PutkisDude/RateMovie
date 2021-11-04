@@ -11,8 +11,11 @@ import javax.persistence.Id;
 import javax.persistence.JoinColumn;
 import javax.persistence.JoinTable;
 import javax.persistence.ManyToMany;
+import javax.persistence.ManyToOne;
 import javax.persistence.OneToMany;
 import javax.persistence.Table;
+
+import com.fasterxml.jackson.annotation.JsonIgnoreProperties;
 
 
 @Entity
@@ -35,7 +38,7 @@ public class Movie {
 	private List<Genre> movieGenres = new ArrayList<>();
 	
     
-	@OneToMany(cascade = CascadeType.ALL, mappedBy = "rating")
+	@OneToMany(cascade = CascadeType.ALL, mappedBy = "movie")
 	private List<Rating> ratings;
 	
 	
@@ -84,6 +87,14 @@ public class Movie {
 
 	public void setMovieGenres(List<Genre> movieGenres) {
 		this.movieGenres = movieGenres;
+	}
+
+	public List<Rating> getRatings() {
+		return ratings;
+	}
+
+	public void setRatings(List<Rating> ratings) {
+		this.ratings = ratings;
 	}
 
 }

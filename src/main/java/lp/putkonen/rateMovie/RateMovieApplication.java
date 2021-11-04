@@ -69,7 +69,9 @@ public class RateMovieApplication {
 			rateRepo.save(new Rating(user2, mov2, 4, "Awsum"));
 			rateRepo.save(new Rating(user2, mov, 4, "Oh ye"));
 			rateRepo.save(new Rating(user2, lit, 5, "Awsum"));
-			
+						
+	//		userRepo.deleteById((long) 1);
+	//		movieRepo.deleteById((long) 1);
 		};
 	}
 }
