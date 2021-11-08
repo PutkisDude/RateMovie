@@ -24,10 +24,14 @@ public class Genre {
 	@GeneratedValue(strategy=GenerationType.IDENTITY)
 	@Column(name = "id")
 	private Long id;
-	
 	private String name;
 	
-	@ManyToMany(mappedBy="movieGenres")
+	@ManyToMany(mappedBy="movieGenres", cascade = {CascadeType.DETACH,
+			CascadeType.PERSIST,
+			CascadeType.MERGE,
+			CascadeType.REFRESH,
+			CascadeType.REMOVE
+	})
 	private List<Movie> moviesGen = new ArrayList<>();
 	
 	public void moviesGen(Movie movie) {
@@ -35,19 +39,13 @@ public class Genre {
 	}
 	
 	public Genre() {
-		this.name = null;
 	}
 
 	public Genre(String name) {
 		super();
 		this.name = name;
 	}
-	public long getGenreId() {
-		return id;
-	}
-	public void setGenreId(long genreId) {
-		this.id = genreId;
-	}
+
 	public String getName() {
 		return name;
 	}
@@ -56,6 +54,22 @@ public class Genre {
 	}
 	@Override
 	public String toString() {
-		return "Genre [genreId=" + id + ", name=" + name + "]";
+		return "Genre [id=" + id + ", name=" + name + "]";
+	}
+
+	public Long getId() {
+		return id;
+	}
+
+	public void setId(Long id) {
+		this.id = id;
+	}
+
+	public List<Movie> getMoviesGen() {
+		return moviesGen;
+	}
+
+	public void setMoviesGen(List<Movie> moviesGen) {
+		this.moviesGen = moviesGen;
 	}	
 }

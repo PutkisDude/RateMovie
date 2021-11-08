@@ -4,7 +4,13 @@
 <title>Rate Movie</title>
 </head>
 <body>
-
+	
+	<h1>Add a genre</h1>
+	<form action="#" th:action="@{/savegenre}" th:object="${genre}" method="POST">
+		<input th:if="${id != null}" type="hidden" th:field=*{id} readonly />
+		<input type="text" th:field="*{name}" />
+		<input type="submit" value="Save" />
+	</form>
 
 </body>
 </html>

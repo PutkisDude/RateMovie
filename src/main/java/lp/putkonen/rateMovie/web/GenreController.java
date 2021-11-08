@@ -6,6 +6,8 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.GetMapping;
+import org.springframework.web.bind.annotation.PathVariable;
+import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.ResponseBody;
 
 import lp.putkonen.rateMovie.domain.Genre;
@@ -27,4 +29,29 @@ public class GenreController {
 		model.addAttribute("genres", genreRepo.findAll());
 		return "genres";
 	}
+	
+	@GetMapping("/addgenre")
+	public String addGenre(Model model) {
+		model.addAttribute("genre", new Genre());
+		return "add_genre";
+	}
+	
+	
+	  @GetMapping("/renamegenre/{id}") 
+	  public String renameGenre(@PathVariable("id") Long genreId, Model model) {
+		  System.out.println("TOPFEWOPFEWOPFEWOPFEW " + genreRepo.findById(genreId));
+		  model.addAttribute("genre", genreRepo.findById(genreId)); 
+		  return "add_genre"; }
+	  
+	  @GetMapping("/deletegenre/{id}") 
+	  public String deleteGenre(@PathVariable("id") Long genreId, Model model) {
+	  genreRepo.deleteById(genreId);
+	  return "redirect:../genres";
+	}
+	  
+	  @PostMapping("/savegenre") public String saveGenre(Genre genre) {
+		  genreRepo.save(genre); 
+		  return "redirect:genres"; 
+	  }
+	 
 }
