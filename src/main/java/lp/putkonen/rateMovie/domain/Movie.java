@@ -11,7 +11,6 @@ import javax.persistence.Id;
 import javax.persistence.JoinColumn;
 import javax.persistence.JoinTable;
 import javax.persistence.ManyToMany;
-import javax.persistence.ManyToOne;
 import javax.persistence.OneToMany;
 import javax.persistence.Table;
 
@@ -29,7 +28,7 @@ public class Movie {
 	private String title;
 	private int year;
 	private int length;
-	
+		
 	@ManyToMany
 	@JoinTable(
 			name="movie_genres",
@@ -77,6 +76,16 @@ public class Movie {
 	public int getLength() {
 		return length;
 	}
+	
+	public String getLengthInHoursAndMinutes() {
+		String len = "";
+		if(this.length > 59) {
+			len += this.length/60  +"hrs";
+		}
+		len += " " + this.length%60 + "mins";
+		return len;
+	}
+	
 	public void setLength(int length) {
 		this.length = length;
 	}
@@ -96,12 +105,12 @@ public class Movie {
 	public void setRatings(List<Rating> ratings) {
 		this.ratings = ratings;
 	}
+	
+
 
 	@Override
 	public String toString() {
 		return "Movie [movieId=" + movieId + ", title=" + title + ", year=" + year + ", length=" + length + "]";
 	}
-
-
 
 }

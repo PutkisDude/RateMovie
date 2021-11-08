@@ -1,6 +1,7 @@
 package lp.putkonen.rateMovie.domain;
 
-import java.time.LocalDateTime;
+import java.util.Date;
+
 import javax.persistence.Entity;
 import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
@@ -8,6 +9,10 @@ import javax.persistence.Id;
 import javax.persistence.JoinColumn;
 import javax.persistence.ManyToOne;
 import javax.persistence.Table;
+import javax.persistence.Temporal;
+import javax.persistence.TemporalType;
+
+import org.hibernate.annotations.CreationTimestamp;
 
 import com.fasterxml.jackson.annotation.JsonIgnoreProperties;
 
@@ -21,8 +26,11 @@ public class Rating {
 	private Long ratingId;
 	private int rating;
 	private String comment;
-	private LocalDateTime localDateTime;
 	
+	@CreationTimestamp
+	@Temporal(TemporalType.TIMESTAMP)
+	private Date timeCreated;
+		
     @ManyToOne 
     @JoinColumn(name = "user_id")
     @JsonIgnoreProperties ("users") 
@@ -92,12 +100,14 @@ public class Rating {
 				+ ", movie=" + movie + "]";
 	}
 
-	public LocalDateTime getLocalDateTime() {
-		return localDateTime;
+	public Date getLocalDateTime() {
+		return timeCreated;
 	}
 
-	public void setLocalDateTime(LocalDateTime localDateTime) {
-		this.localDateTime = localDateTime;
+	public void setLocalDateTime(Date localDateTime) {
+		this.timeCreated = localDateTime;
 	}
+
+
 	
 }

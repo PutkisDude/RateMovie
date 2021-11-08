@@ -13,9 +13,9 @@ public class RatingController {
 	@Autowired
 	private RatingRepository rateRepo;
 	
-	@GetMapping
+	@GetMapping("/rating")
 	public String index(Model model) {
 		model.addAttribute("ratings", rateRepo.findAll());
-		return "index";
+		return "rating";
 	}
 }

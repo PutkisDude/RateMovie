@@ -1,0 +1,26 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org">
+<head>
+<title>Rate Movie</title>
+</head>
+<body>
+	
+	<h1 th:text=${movie.title}></h1>
+	<ul>
+		<li th:text="'Year - ' + ${movie.year}"></li>
+		<li th:text="'Length - ' + ${movie.getLengthInHoursAndMinutes} "></li>
+		<li>Genres
+			<ul>
+				<li th:each="genre : ${movie.getMovieGenres()}">
+				<span th:text=${genre.name}></span>
+				</li>
+			</ul>
+		</li>
+	</ul>
+		
+	<ul>
+		<li>Ratings?</li>
+	</ul>
+
+</body>
+</html>
