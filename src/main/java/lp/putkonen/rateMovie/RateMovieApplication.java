@@ -45,9 +45,9 @@ public class RateMovieApplication {
 			
 			Movie nightmareBefore = new Movie("Nightmare Before Christmas", 1993, 76);
 			Movie lit = new Movie("Lost In Translation", 2003, 101);
-			Movie mov = new Movie("In Translation", 2003, 101);
-			Movie mov2 = new Movie("Lost in", 2003, 101);
-			Movie mov3 = new Movie("Lost Translation", 2003, 101);
+			Movie mov = new Movie("Plan 9 From Outer Space", 1959, 79);
+			Movie mov2 = new Movie("Forrest Gump", 1994, 144);
+			Movie mov3 = new Movie("Into The Wild", 2007, 148);
 			
 			movieRepo.save(mov);
 			movieRepo.save(mov2);
@@ -68,7 +68,7 @@ public class RateMovieApplication {
 			rateRepo.save(new Rating(user1, mov, 1, "Shiet"));
 			rateRepo.save(new Rating(user2, mov2, 4, "Awsum"));
 			rateRepo.save(new Rating(user2, mov, 4, "Oh ye"));
-			rateRepo.save(new Rating(user2, lit, 5, "Awsum"));
+			rateRepo.save(new Rating(user2, lit, 4, "Awsum"));
 												
 	//		userRepo.deleteById((long) 1);
 	//		movieRepo.deleteById((long) 1);

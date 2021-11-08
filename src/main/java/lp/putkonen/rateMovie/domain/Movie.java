@@ -28,6 +28,8 @@ public class Movie {
 	private String title;
 	private int year;
 	private int length;
+	private double avgRating;
+	private int rateCount;
 		
 	@ManyToMany
 	@JoinTable(
@@ -106,11 +108,26 @@ public class Movie {
 		this.ratings = ratings;
 	}
 	
+	public double getAvgRating() {
+		return avgRating;
+	}
 
+	public void setAvgRating(double avgRating) {
+		this.avgRating = avgRating;
+	}
+
+	public int getRateCount() {
+		return rateCount;
+	}
+
+	public void setRateCount(int rateCount) {
+		this.rateCount = rateCount;
+	}
 
 	@Override
 	public String toString() {
-		return "Movie [movieId=" + movieId + ", title=" + title + ", year=" + year + ", length=" + length + "]";
+		return "Movie [movieId=" + movieId + ", title=" + title + ", year=" + year + ", length=" + length
+				+ ", avgRating=" + avgRating + ", rateCount=" + rateCount + "]";
 	}
 
 }

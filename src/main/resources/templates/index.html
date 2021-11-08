@@ -2,21 +2,25 @@
 <html xmlns:th="http://www.thymeleaf.org">
 <head>
 <title>Rate Movie</title>
+    <link th:rel="stylesheet" th:href="@{/webjars/bootstrap/5.1.3/css/bootstrap.min.css} "/>
+
 </head>
 <body>
 
-	<table>
+	<table class="table">
 	<tr>
-		<th>Name</th>
+		<th>Title</th>
 		<th>Year</th>
-		<th>Length (mins)</th>
+		<th>Length</th>
 		<th>Rating</th>
+		<th>Ratings</th>
 	</tr>
 		<tr th:each="movie : ${movies}">
 			<td th:text=${movie.title}></td>
 			<td th:text=${movie.year}></td>
 			<td th:text=${movie.lengthInHoursAndMinutes}></td>
-			</td>
+			<td th:text="${movie.rateCount} > 0 ? ${movie.avgRating} : ''"></td>
+			<td th:text=${movie.rateCount}></td>
 		</tr>
 	</table>
 

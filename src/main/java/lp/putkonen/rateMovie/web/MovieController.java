@@ -6,7 +6,6 @@ import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PathVariable;
 
-import lp.putkonen.rateMovie.domain.GenreRepository;
 import lp.putkonen.rateMovie.domain.MovieRepository;
 
 @Controller
@@ -18,6 +17,7 @@ public class MovieController {
 	  
 	  @GetMapping("/")
 	public String movies(Model model) {
+		movieRepo.updateRatings();
 		model.addAttribute("movies", movieRepo.findAll());
 		return "index";
 	}
