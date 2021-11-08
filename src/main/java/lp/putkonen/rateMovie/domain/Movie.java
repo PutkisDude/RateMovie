@@ -82,9 +82,9 @@ public class Movie {
 	public String getLengthInHoursAndMinutes() {
 		String len = "";
 		if(this.length > 59) {
-			len += this.length/60  +"hrs";
+			len += this.length/60  +"h";
 		}
-		len += " " + this.length%60 + "mins";
+		len += " " + this.length%60 + "m";
 		return len;
 	}
 	
