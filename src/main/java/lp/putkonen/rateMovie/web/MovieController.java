@@ -25,6 +25,12 @@ public class MovieController {
 		  return  (List<Movie>) movieRepo.findAll();
 	  }
 	  
+	  @GetMapping("/search/{title}")
+	  public @ResponseBody List<Movie> searchMovie(@PathVariable("title") String title) {
+		  movieRepo.updateRatings();
+		  return (List<Movie>) movieRepo.findByTitleContainingIgnoreCase(title);
+	  }
+	  
 	  @GetMapping("/")
 	public String movies(Model model) {
 		movieRepo.updateRatings();

@@ -19,7 +19,7 @@ import com.fasterxml.jackson.annotation.JsonIgnoreProperties;
 
 @Entity
 @Table(name="Movie")
-@JsonIgnoreProperties(value = { "ratings" })
+@JsonIgnoreProperties(value = { "ratings"})
 public class Movie {
 
 	@Id
