@@ -2,22 +2,20 @@ package lp.putkonen.rateMovie.domain;
 
 import java.util.ArrayList;
 import java.util.List;
-import java.util.Set;
-
-import javax.persistence.CascadeType;
 import javax.persistence.Column;
 import javax.persistence.Entity;
+import javax.persistence.FetchType;
 import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
 import javax.persistence.Id;
-import javax.persistence.JoinColumn;
-import javax.persistence.JoinTable;
 import javax.persistence.ManyToMany;
-import javax.persistence.OneToMany;
 import javax.persistence.Table;
+
+import com.fasterxml.jackson.annotation.JsonIgnoreProperties;
 
 @Entity
 @Table(name="Genre")
+@JsonIgnoreProperties(value = { "moviesGen" })
 public class Genre {
 	
 	@Id
@@ -26,13 +24,8 @@ public class Genre {
 	private Long id;
 	private String name;
 	
-	@ManyToMany(mappedBy="movieGenres", cascade = {CascadeType.DETACH,
-			CascadeType.PERSIST,
-			CascadeType.MERGE,
-			CascadeType.REFRESH,
-			CascadeType.REMOVE
-	})
-	private List<Movie> moviesGen = new ArrayList<>();
+	@ManyToMany(mappedBy="movieGenres", fetch = FetchType.LAZY)
+	private List<Movie> moviesGen = new ArrayList<Movie>();
 	
 	public void moviesGen(Movie movie) {
 		moviesGen.add(movie);
@@ -63,6 +56,14 @@ public class Genre {
 
 	public void setId(Long id) {
 		this.id = id;
+	}
+	
+	public void addMovie(Movie movie) {
+		moviesGen.add(movie);
+	}
+	
+	public void removeMovie(Movie movie) {
+		moviesGen.remove(movie);
 	}
 
 	public List<Movie> getMoviesGen() {

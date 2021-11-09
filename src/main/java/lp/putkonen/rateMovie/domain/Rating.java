@@ -33,12 +33,12 @@ public class Rating {
 		
     @ManyToOne 
     @JoinColumn(name = "user_id")
-    @JsonIgnoreProperties ("users") 
+    @JsonIgnoreProperties ("ratings") 
     private User user;
     
     @ManyToOne 
     @JoinColumn(name = "movie_id")
-    @JsonIgnoreProperties ("movies") 
+    @JsonIgnoreProperties ("ratings") 
     private Movie movie;
 	
     
@@ -96,8 +96,7 @@ public class Rating {
 
 	@Override
 	public String toString() {
-		return "Rating [ratingId=" + ratingId + ", rating=" + rating + ", comment=" + comment + ", user=" + user
-				+ ", movie=" + movie + "]";
+		return "Rating [ratingId=" + ratingId + ", rating=" + rating + ", comment=" + comment + "]";
 	}
 
 	public Date getLocalDateTime() {

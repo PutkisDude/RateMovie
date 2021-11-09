@@ -1,7 +1,6 @@
 package lp.putkonen.rateMovie.web;
 
 import java.util.List;
-
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
@@ -19,7 +18,7 @@ public class GenreController {
 	@Autowired
 	private GenreRepository genreRepo;
 	
-	@GetMapping("/genre-api")
+	@GetMapping("/api/genres")
 	public @ResponseBody List<Genre> index() {
 		return (List<Genre>) genreRepo.findAll();
 	}
@@ -36,19 +35,13 @@ public class GenreController {
 		return "add_genre";
 	}
 	
-	
 	  @GetMapping("/renamegenre/{id}") 
 	  public String renameGenre(@PathVariable("id") Long genreId, Model model) {
 		  System.out.println("TOPFEWOPFEWOPFEWOPFEW " + genreRepo.findById(genreId));
 		  model.addAttribute("genre", genreRepo.findById(genreId)); 
 		  return "add_genre"; }
 	  
-	  @GetMapping("/deletegenre/{id}") 
-	  public String deleteGenre(@PathVariable("id") Long genreId, Model model) {
-	  genreRepo.deleteById(genreId);
-	  return "redirect:../genres";
-	}
-	  
+
 	  @PostMapping("/savegenre") public String saveGenre(Genre genre) {
 		  genreRepo.save(genre); 
 		  return "redirect:genres"; 

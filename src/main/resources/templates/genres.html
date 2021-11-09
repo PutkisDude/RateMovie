@@ -6,16 +6,15 @@
 <body>
 
 	<a href="/addgenre"><button>Add New Genre</button></a>
+	<br /><br />
 	<table>
 		<tr>
 			<th>Genre</th>
 			<th>Rename</th>
-			<th>Delete</th>
 		</tr>
 		<tr th:each="genre : ${genres}">
 			<td th:text=${genre.name}></td>
 			<td><a th:href="@{/renamegenre/{id}(id=${genre.id})}"><button>Rename</button></a></td>
-			<td><a th:href="@{/deletegenre/{id}(id=${genre.id})}"><button>Delete</button></a></td>
 		</tr>
 	</table>
 	

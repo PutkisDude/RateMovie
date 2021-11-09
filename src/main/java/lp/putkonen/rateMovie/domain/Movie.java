@@ -19,6 +19,7 @@ import com.fasterxml.jackson.annotation.JsonIgnoreProperties;
 
 @Entity
 @Table(name="Movie")
+@JsonIgnoreProperties(value = { "ratings" })
 public class Movie {
 
 	@Id
@@ -36,7 +37,7 @@ public class Movie {
 			name="movie_genres",
 	joinColumns= @JoinColumn(name = "movie_id"),
 	inverseJoinColumns = @JoinColumn(name = "genre_id"))
-	private List<Genre> movieGenres = new ArrayList<>();
+	private List<Genre> movieGenres = new ArrayList<Genre>();
 	
     
 	@OneToMany(cascade = CascadeType.ALL, mappedBy = "movie")
@@ -54,6 +55,10 @@ public class Movie {
 	
 	public void addGenre(Genre genre) {
 		movieGenres.add(genre);
+	}
+	
+	public void removeGenre(Genre genre) {
+		movieGenres.remove(genre);
 	}
 		
 	public long getMovieId() {
