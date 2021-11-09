@@ -33,7 +33,7 @@ public class Rating {
 		
     @ManyToOne 
     @JoinColumn(name = "user_id")
-    @JsonIgnoreProperties ("ratings") 
+    @JsonIgnoreProperties ({"ratings", "userId"}) 
     private User user;
     
     @ManyToOne 
@@ -103,8 +103,8 @@ public class Rating {
 		return timeCreated;
 	}
 
-	public void setLocalDateTime(Date localDateTime) {
-		this.timeCreated = localDateTime;
+	public void setLocalDateTime(Date timeRated) {
+		this.timeCreated = timeRated;
 	}
 
 
