@@ -20,10 +20,11 @@
 		
 	<h2>Rate</h2>
 	
-	<form action="/rate" method="POST">
-	<input type="range" min="1" max="5" /><br />
-	<input type="text" max="250" />	<br />
-	<input type="submit" value="Rate" />
+	<form th:object=${rate} th:action="@{/rate}" action="#" method="POST">
+		<input type="hidden" th:field="*{movie.movieId}">
+		<input type="range" min="1" max="5" th:field="*{rating}" /> <br />
+		<input type="text" placeholder="comment" th:field="*{comment}" /> <br />
+		<input type="submit" value="Rate" />
 	</form>
 	
 	<h2>Ratings</h2>

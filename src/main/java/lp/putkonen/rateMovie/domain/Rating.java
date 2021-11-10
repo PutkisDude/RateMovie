@@ -46,6 +46,10 @@ public class Rating {
 		
 	}
 	
+	public Rating(Movie movie) {
+		this.movie = movie;
+	}
+	
 	public Rating(User user, Movie movie, int rating, String comment) {
 		this.movie = movie;
 		this.user = user;

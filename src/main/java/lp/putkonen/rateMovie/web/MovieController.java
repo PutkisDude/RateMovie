@@ -1,6 +1,7 @@
 package lp.putkonen.rateMovie.web;
 
 import java.util.List;
+import java.util.Optional;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
@@ -11,6 +12,10 @@ import org.springframework.web.bind.annotation.ResponseBody;
 
 import lp.putkonen.rateMovie.domain.Movie;
 import lp.putkonen.rateMovie.domain.MovieRepository;
+import lp.putkonen.rateMovie.domain.Rating;
+import lp.putkonen.rateMovie.domain.RatingRepository;
+import lp.putkonen.rateMovie.domain.User;
+import lp.putkonen.rateMovie.domain.UserRepository;
 
 @Controller
 public class MovieController {
@@ -18,6 +23,12 @@ public class MovieController {
 	
 	  @Autowired 
 	  private MovieRepository movieRepo;
+	  
+	  @Autowired
+	  private UserRepository userRepository;
+	  
+	  @Autowired 
+	  private RatingRepository ratingRepository;
 	  
 	  @GetMapping("/api/movies")
 	  public @ResponseBody List<Movie> movieApi(){
@@ -44,7 +55,16 @@ public class MovieController {
 			if(movieRepo.findById(movieId).isEmpty()) {
 				page =  "nosuchmovie";
 			}else {
-				model.addAttribute("movie", movieRepo.findById(movieId).get());
+				Movie movie = movieRepo.findById(movieId).get();
+				Optional<User> user = userRepository.findById((long) 1);
+				Rating rating;
+				if(ratingRepository.existsByMovieAndUser(movie, user)) {
+					 rating = ratingRepository.findByMovieAndUser(movie, user);
+				} else {
+					 rating = new Rating(movie);
+				}				
+				model.addAttribute("movie", movie);
+				model.addAttribute("rate", rating);
 				page = "movie";
 			}
 		return page;
