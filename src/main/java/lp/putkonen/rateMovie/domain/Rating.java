@@ -96,7 +96,7 @@ public class Rating {
 
 	@Override
 	public String toString() {
-		return "Rating [ratingId=" + ratingId + ", rating=" + rating + ", comment=" + comment + "]";
+		return "Rating [ratingId=" + ratingId + ", rating=" + rating + ", comment=" + comment + ", user=" + user.getName() + "]";
 	}
 
 	public Date getLocalDateTime() {

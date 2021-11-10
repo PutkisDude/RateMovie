@@ -65,7 +65,7 @@ public class RateMovieApplication {
 			
 			rateRepo.save(new Rating(user1, lit, 5, "Great Movie"));
 			rateRepo.save(new Rating(user2, mov3, 4, "Awsum"));
-			rateRepo.save(new Rating(user1, mov, 1, "Shiet"));
+			rateRepo.save(new Rating(user1, mov, 1, "So bad"));
 			rateRepo.save(new Rating(user2, mov2, 4, "Awsum"));
 			rateRepo.save(new Rating(user2, mov, 4, "Oh ye"));
 			rateRepo.save(new Rating(user2, lit, 4, "Awsum"));

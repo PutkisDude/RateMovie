@@ -37,7 +37,6 @@ public class GenreController {
 	
 	  @GetMapping("/renamegenre/{id}") 
 	  public String renameGenre(@PathVariable("id") Long genreId, Model model) {
-		  System.out.println("TOPFEWOPFEWOPFEWOPFEW " + genreRepo.findById(genreId));
 		  model.addAttribute("genre", genreRepo.findById(genreId)); 
 		  return "add_genre"; }
 	  

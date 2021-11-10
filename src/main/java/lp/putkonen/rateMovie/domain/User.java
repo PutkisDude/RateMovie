@@ -23,8 +23,9 @@ public class User {
 	@GeneratedValue(strategy=GenerationType.IDENTITY)
 	@Column(name = "user_id", unique = true, nullable = false)
 	private Long userId;
-	private String name;
+	private String username;
 	private String password;
+	private String role;
 	
 
 	@OneToMany(cascade = CascadeType.ALL, mappedBy = "user")	
@@ -34,8 +35,8 @@ public class User {
 		
 	}
 	
-	public User(String name, String password) {
-		this.name = name;
+	public User(String username, String password) {
+		this.username = username;
 		this.password = password;
 	}
 
@@ -48,11 +49,11 @@ public class User {
 	}
 
 	public String getName() {
-		return name;
+		return username;
 	}
 
 	public void setName(String name) {
-		this.name = name;
+		this.username = name;
 	}
 
 	public String getPassword() {
@@ -65,7 +66,7 @@ public class User {
 	
 	@Override
 	public String toString() {
-		return "User [userId=" + userId + ", name=" + name + ", password=" + password + "]";
+		return "User [userId=" + userId + ", name=" + username + ", password=" + password + "]";
 	}
 
 	public String getRole() {

@@ -24,13 +24,16 @@ public class UserController {
 	UserRepository userRepo;
 	
 	
-	// MAKE USER PAGE FROM findByUsername...
-	@GetMapping("/user/{name}")
-	public @ResponseBody Optional<User> userPage(@PathVariable("name") String username){
-		String search = username.trim();
-		return Optional.ofNullable(userRepo.findByUsernameIgnoreCase(search));
-		
-	}
+	/*
+	 * // MAKE USER PAGE FROM findByUsername...
+	 * 
+	 * @GetMapping("/user/{name}") public @ResponseBody Optional<User>
+	 * userPage(@PathVariable("name") String username){ String search =
+	 * username.trim(); return
+	 * Optional.ofNullable(userRepo.findByUsernameIgnoreCase(search));
+	 * 
+	 * }
+	 */
 	
 	
 	@GetMapping("/api/user/{id}")

@@ -19,5 +19,8 @@ public interface MovieRepository extends CrudRepository<Movie, Long> {
 			+ "GROUP BY id", 
 			nativeQuery = true)
 	List<Movie> updateRatings();
+	
+	
+	public Movie findByTitle(String title);
 
 }
