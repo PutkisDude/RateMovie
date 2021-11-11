@@ -52,21 +52,29 @@ public class MovieController {
 	@GetMapping("/movie/{id}")
 	public String moviePage(@PathVariable("id") Long movieId, Model model) {
 		String page = "";
+		
+		
 			if(movieRepo.findById(movieId).isEmpty()) {
 				page =  "nosuchmovie";
 			}else {
 				Movie movie = movieRepo.findById(movieId).get();
 				Optional<User> user = userRepository.findById((long) 1);
 				Rating rating;
+				
 				if(ratingRepository.existsByMovieAndUser(movie, user)) {
 					 rating = ratingRepository.findByMovieAndUser(movie, user);
-				} else {
+
+				}else {
 					 rating = new Rating(movie);
-				}				
+				}
+
+				System.out.println("\n\n\n " + rating + "\n\n\n");
+
 				model.addAttribute("movie", movie);
 				model.addAttribute("rate", rating);
 				page = "movie";
 			}
+			
 		return page;
 	}
 }

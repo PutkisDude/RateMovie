@@ -40,6 +40,11 @@ public class User {
 		this.password = password;
 	}
 
+	@Override
+	public String toString() {
+		return "User [userId=" + userId + ", username=" + username + ", password=" + password + ", role=" + role + "]";
+	}
+
 	public Long getUserId() {
 		return userId;
 	}
@@ -48,12 +53,12 @@ public class User {
 		this.userId = userId;
 	}
 
-	public String getName() {
+	public String getUsername() {
 		return username;
 	}
 
-	public void setName(String name) {
-		this.username = name;
+	public void setUsername(String username) {
+		this.username = username;
 	}
 
 	public String getPassword() {
@@ -63,15 +68,13 @@ public class User {
 	public void setPassword(String password) {
 		this.password = password;
 	}
-	
-	@Override
-	public String toString() {
-		return "User [userId=" + userId + ", name=" + username + ", password=" + password + "]";
-	}
 
 	public String getRole() {
-		// TODO Auto-generated method stub
-		return null;
+		return role;
+	}
+
+	public void setRole(String role) {
+		this.role = role;
 	}
 
 	public List<Rating> getRatings() {
@@ -80,5 +83,7 @@ public class User {
 
 	public void setRatings(List<Rating> ratings) {
 		this.ratings = ratings;
-	}	
+	}
+	
+
 }

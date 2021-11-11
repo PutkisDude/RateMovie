@@ -25,7 +25,7 @@ public class Movie {
 	@Id
 	@GeneratedValue(strategy=GenerationType.IDENTITY)
 	@Column(name = "id")
-	private long movieId;	
+	private Long movieId;	
 	private String title;
 	private int year;
 	private int length;
@@ -61,10 +61,10 @@ public class Movie {
 		movieGenres.remove(genre);
 	}
 		
-	public long getMovieId() {
+	public Long getMovieId() {
 		return movieId;
 	}
-	public void setMovieId(long movieId) {
+	public void setMovieId(Long movieId) {
 		this.movieId = movieId;
 	}
 	public String getTitle() {
@@ -83,18 +83,21 @@ public class Movie {
 	public int getLength() {
 		return length;
 	}
-	
-	public String getLengthInHoursAndMinutes() {
-		String len = "";
-		if(this.length > 59) {
-			len += this.length/60  +"h";
-		}
-		len += " " + this.length%60 + "m";
-		return len;
+
+	public double getAvgRating() {
+		return avgRating;
 	}
-	
-	public void setLength(int length) {
-		this.length = length;
+
+	public void setAvgRating(double avgRating) {
+		this.avgRating = avgRating;
+	}
+
+	public int getRateCount() {
+		return rateCount;
+	}
+
+	public void setRateCount(int rateCount) {
+		this.rateCount = rateCount;
 	}
 
 	public List<Genre> getMovieGenres() {
@@ -112,21 +115,18 @@ public class Movie {
 	public void setRatings(List<Rating> ratings) {
 		this.ratings = ratings;
 	}
+
+	public void setLength(int length) {
+		this.length = length;
+	}
 	
-	public double getAvgRating() {
-		return avgRating;
-	}
-
-	public void setAvgRating(double avgRating) {
-		this.avgRating = avgRating;
-	}
-
-	public int getRateCount() {
-		return rateCount;
-	}
-
-	public void setRateCount(int rateCount) {
-		this.rateCount = rateCount;
+	public String getLengthInHoursAndMinutes() {
+		String len = "";
+		if(this.length > 59) {
+			len += this.length/60  +"h";
+		}
+		len += " " + this.length%60 + "m";
+		return len;
 	}
 
 	@Override
@@ -134,5 +134,5 @@ public class Movie {
 		return "Movie [movieId=" + movieId + ", title=" + title + ", year=" + year + ", length=" + length
 				+ ", avgRating=" + avgRating + ", rateCount=" + rateCount + "]";
 	}
-
+	
 }

@@ -24,7 +24,7 @@ public class Rating {
 	@Id
 	@GeneratedValue(strategy=GenerationType.IDENTITY)
 	private Long ratingId;
-	private int rating;
+	private int points;
 	private String comment;
 	
 	@CreationTimestamp
@@ -50,13 +50,13 @@ public class Rating {
 		this.movie = movie;
 	}
 	
-	public Rating(User user, Movie movie, int rating, String comment) {
+	public Rating(User user, Movie movie, int points, String comment) {
 		this.movie = movie;
 		this.user = user;
-		this.rating = rating;
+		this.points = points;
 		this.comment = comment;
 	}
-	
+
 	public Long getRatingId() {
 		return ratingId;
 	}
@@ -65,12 +65,12 @@ public class Rating {
 		this.ratingId = ratingId;
 	}
 
-	public int getRating() {
-		return rating;
+	public int getPoints() {
+		return points;
 	}
 
-	public void setRating(int rating) {
-		this.rating = rating;
+	public void setPoints(int points) {
+		this.points = points;
 	}
 
 	public String getComment() {
@@ -81,6 +81,13 @@ public class Rating {
 		this.comment = comment;
 	}
 
+	public Date getTimeCreated() {
+		return timeCreated;
+	}
+
+	public void setTimeCreated(Date timeCreated) {
+		this.timeCreated = timeCreated;
+	}
 
 	public User getUser() {
 		return user;
@@ -100,17 +107,10 @@ public class Rating {
 
 	@Override
 	public String toString() {
-		return "Rating [ratingId=" + ratingId + ", rating=" + rating + ", comment=" + comment + ", user=" + user.getName() + "]";
+		return "Rating [ratingId=" + ratingId + ", rating=" + points + ", comment=" + comment + ", timeCreated="
+				+ timeCreated + ", user=" + user + ", movie=" + movie + "]";
 	}
-
-	public Date getLocalDateTime() {
-		return timeCreated;
-	}
-
-	public void setLocalDateTime(Date timeRated) {
-		this.timeCreated = timeRated;
-	}
-
+	
 
 	
 }

@@ -46,7 +46,27 @@ public class RatingController {
 	}
 	
 	@PostMapping("/rate")
-	public void rateMovie(Movie movie, User user) {
+	public String rateMovie(Rating rating) {
+				
+		Rating tempRate = rating;
+		User user = userRepo.findById(1L).get();
+
+		if(tempRate.getRatingId() != null) {
+			Rating realRate = rateRepo.findById(rating.getRatingId()).get();	
+			realRate.setPoints(tempRate.getPoints());
+			realRate.setComment(tempRate.getComment());
+			rateRepo.save(realRate);
+		} else {
+			tempRate.setUser(user);
+			rateRepo.save(tempRate);
+		}
+		
+
+		
+		System.out.println("\n\n\n " + rating + "\n\n\n");
+
+		
+		return "redirect:/";
 		
 	}
 }

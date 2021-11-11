@@ -12,7 +12,7 @@ public interface MovieRepository extends CrudRepository<Movie, Long> {
 	
 	// Custom Query for avg and count functions
 	
-	@Query(value = "SELECT ID, TITLE, LENGTH, YEAR, AVG(CAST(rating AS FLOAT)) AS AVG_RATING, COUNT(RATING) AS RATE_COUNT "
+	@Query(value = "SELECT ID, TITLE, LENGTH, YEAR, AVG(CAST(points AS FLOAT)) AS AVG_RATING, COUNT(POINTS) AS RATE_COUNT "
 			+ "FROM MOVIE "
 			+ "INNER JOIN RATING "
 			+ "ON movie.id = rating.movie_id "

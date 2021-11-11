@@ -19,10 +19,12 @@
 	</ul>
 		
 	<h2>Rate</h2>
-	
+		
 	<form th:object=${rate} th:action="@{/rate}" action="#" method="POST">
-		<input type="hidden" th:field="*{movie.movieId}">
-		<input type="range" min="1" max="5" th:field="*{rating}" /> <br />
+		<input type="hidden" th:field="*{movie}">
+		<input type="hidden" th:field="*{user.username}">
+		<input type="hidden" th:field="*{ratingId}" />
+		<input type="range" min="1" max="5" th:field="*{points}" /> <br />
 		<input type="text" placeholder="comment" th:field="*{comment}" /> <br />
 		<input type="submit" value="Rate" />
 	</form>
@@ -31,8 +33,8 @@
 	
 	<table>
 	<tr th:each="rating : ${movie.ratings}">
-	<td th:text=${rating.user.name}></td>
-	<td th:text=${rating.rating}></td>
+	<td th:text=${rating.user.username}></td>
+	<td th:text=${rating.points}></td>
 	<td th:text=${rating.comment}></td>
 	</tr>
 	</table>
