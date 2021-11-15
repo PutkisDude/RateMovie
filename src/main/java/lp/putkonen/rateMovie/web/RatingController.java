@@ -1,8 +1,6 @@
 package lp.putkonen.rateMovie.web;
 
 import java.util.List;
-import java.util.Optional;
-
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
@@ -11,7 +9,6 @@ import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.ResponseBody;
 
-import lp.putkonen.rateMovie.domain.Movie;
 import lp.putkonen.rateMovie.domain.Rating;
 import lp.putkonen.rateMovie.domain.RatingRepository;
 import lp.putkonen.rateMovie.domain.User;
@@ -39,7 +36,6 @@ public class RatingController {
 	
 	@GetMapping("/rating/{id}")
 	public String testRate(@PathVariable("id") Long id, Model model) {
-		Optional<User> us = userRepo.findById((long) 1);
 		model.addAttribute("rating", new Rating());
 		
 		return null;

@@ -1,5 +1,7 @@
 package lp.putkonen.rateMovie;
 
+import org.slf4j.Logger;
+import org.slf4j.LoggerFactory;
 import org.springframework.boot.CommandLineRunner;
 import org.springframework.boot.SpringApplication;
 import org.springframework.boot.autoconfigure.SpringBootApplication;
@@ -16,6 +18,7 @@ import lp.putkonen.rateMovie.domain.UserRepository;
 
 @SpringBootApplication
 public class RateMovieApplication {
+	private static final Logger log = LoggerFactory.getLogger(RateMovieApplication.class);
 
 	public static void main(String[] args) {
 		SpringApplication.run(RateMovieApplication.class, args);
@@ -75,6 +78,8 @@ public class RateMovieApplication {
 															
 	//		userRepo.deleteById((long) 1); // DELETE ALL RATINGS FROM USER
 	//		movieRepo.deleteById((long) 1); // DELETE ALL RATINGS FROM MOVIE
+			
+			log.info("SYSTEM UP AND RUNNING!");
 		};
 	}
 }

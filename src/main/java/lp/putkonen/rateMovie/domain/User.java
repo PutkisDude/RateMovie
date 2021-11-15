@@ -1,7 +1,6 @@
 package lp.putkonen.rateMovie.domain;
 
 import java.util.List;
-
 import javax.persistence.CascadeType;
 import javax.persistence.Column;
 import javax.persistence.Entity;
@@ -16,21 +15,23 @@ import com.fasterxml.jackson.annotation.JsonIgnoreProperties;
 
 @Entity
 @Table(name = "User")
-@JsonIgnoreProperties(value = { "password", "role"})
+@JsonIgnoreProperties(value = { "password", "Roles"})
 public class User {
 
 	@Id
 	@GeneratedValue(strategy=GenerationType.IDENTITY)
 	@Column(name = "user_id", unique = true, nullable = false)
 	private Long userId;
+	@Column(name = "username", nullable = false, unique = true)
 	private String username;
+	@Column(name = "password", nullable = false)
 	private String password;
-	private String role;
 	
-
 	@OneToMany(cascade = CascadeType.ALL, mappedBy = "user")	
     private List<Rating> ratings;
-		
+	
+	private String role;
+	
 	public User() {
 		
 	}
@@ -42,7 +43,7 @@ public class User {
 
 	@Override
 	public String toString() {
-		return "User [userId=" + userId + ", username=" + username + ", password=" + password + ", role=" + role + "]";
+		return "User [userId=" + userId + ", username=" + username + "]";
 	}
 
 	public Long getUserId() {
@@ -69,14 +70,6 @@ public class User {
 		this.password = password;
 	}
 
-	public String getRole() {
-		return role;
-	}
-
-	public void setRole(String role) {
-		this.role = role;
-	}
-
 	public List<Rating> getRatings() {
 		return ratings;
 	}
@@ -84,6 +77,13 @@ public class User {
 	public void setRatings(List<Rating> ratings) {
 		this.ratings = ratings;
 	}
-	
+
+	public String getRole() {
+		return role;
+	}
+
+	public void setRole(String role) {
+		this.role = role;
+	}
 
 }

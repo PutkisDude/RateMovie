@@ -1,8 +1,4 @@
 package lp.putkonen.rateMovie;
-// import java.util.ArrayList;
-// import java.util.List;
-//import org.springframework.security.provisioning.InMemoryUserDetailsManager;
-//import org.springframework.context.annotation.Bean;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.context.annotation.Configuration;
@@ -13,8 +9,7 @@ import org.springframework.security.config.annotation.web.configuration.EnableWe
 import org.springframework.security.config.annotation.web.configuration.WebSecurityConfigurerAdapter;
 import org.springframework.security.crypto.bcrypt.BCryptPasswordEncoder;
 
-import lp.putkonen.rateMovie.web.UserDetailsServiceImpl;
-
+import lp.putkonen.rateMovie.web.UserDetailServiceImpl;
 
 @Configuration
 @EnableGlobalMethodSecurity(prePostEnabled = true)
@@ -22,17 +17,23 @@ import lp.putkonen.rateMovie.web.UserDetailsServiceImpl;
 public class WebSecurityConfig extends WebSecurityConfigurerAdapter {
     
 	@Autowired
-    private UserDetailsServiceImpl userDetailsService;	
+    private UserDetailServiceImpl userDetailsService;	
 	
 	@Override
 	protected void configure(HttpSecurity http) throws Exception {
 		http
 			.authorizeRequests()
-			.antMatchers("*").permitAll()
-			.antMatchers("/h2-console/**").permitAll();
+			.antMatchers("/css/**", "/webjars/**", "/h2-console/**").permitAll()
+			.and()
+		.formLogin()
+			.loginPage("/login")
+			.defaultSuccessUrl("/", true)
+			.permitAll()
+			.and()
+		.logout().permitAll();
 		
-        http.csrf().disable();
-        http.headers().frameOptions().disable();
+ //       http.csrf().disable();
+ //       http.headers().frameOptions().disable();
         
         // POISTA H2 ja 2 vikaa riviä ennen julkaisua
 	}

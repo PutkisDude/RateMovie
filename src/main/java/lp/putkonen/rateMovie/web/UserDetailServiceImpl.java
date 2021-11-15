@@ -11,10 +11,14 @@ import lp.putkonen.rateMovie.domain.User;
 import lp.putkonen.rateMovie.domain.UserRepository;
 
 @Service
-public class UserDetailsServiceImpl implements UserDetailsService{
+public class UserDetailServiceImpl implements UserDetailsService{
 
+	private final UserRepository userRepository;
+	
 	@Autowired
-	UserRepository userRepository;
+	public UserDetailServiceImpl(UserRepository userRepository) {
+		this.userRepository = userRepository;
+	}
 	
 	@Override
 	public UserDetails loadUserByUsername(String username) throws UsernameNotFoundException {
