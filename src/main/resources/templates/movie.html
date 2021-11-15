@@ -25,7 +25,7 @@
 		<input type="hidden" th:field="*{user.username}">
 		<input type="hidden" th:field="*{ratingId}" />
 		<input type="range" min="1" max="5" th:field="*{points}" /> <br />
-		<input type="text" placeholder="comment" th:field="*{comment}" /> <br />
+		<input type="text" placeholder="comment" maxlength="50" th:field="*{comment}" /> <br />
 		<input type="submit" value="Rate" />
 	</form>
 	

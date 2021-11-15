@@ -4,6 +4,8 @@ import java.util.List;
 import javax.persistence.CascadeType;
 import javax.persistence.Column;
 import javax.persistence.Entity;
+import javax.persistence.EnumType;
+import javax.persistence.Enumerated;
 import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
 import javax.persistence.Id;
@@ -15,7 +17,7 @@ import com.fasterxml.jackson.annotation.JsonIgnoreProperties;
 
 @Entity
 @Table(name = "User")
-@JsonIgnoreProperties(value = { "password", "Roles"})
+@JsonIgnoreProperties(value = { "password", "role"})
 public class User {
 
 	@Id
@@ -30,7 +32,8 @@ public class User {
 	@OneToMany(cascade = CascadeType.ALL, mappedBy = "user")	
     private List<Rating> ratings;
 	
-	private String role;
+	@Enumerated(EnumType.STRING)
+	private Role role;
 	
 	public User() {
 		
@@ -39,6 +42,13 @@ public class User {
 	public User(String username, String password) {
 		this.username = username;
 		this.password = password;
+		this.role = Role.USER;
+	}
+	
+	public User(String username, String password, Role role) {
+		this.username = username;
+		this.password = password;
+		this.role = role;
 	}
 
 	@Override
@@ -79,10 +89,10 @@ public class User {
 	}
 
 	public String getRole() {
-		return role;
+		return role.name();
 	}
 
-	public void setRole(String role) {
+	public void setRole(Role role) {
 		this.role = role;
 	}
 

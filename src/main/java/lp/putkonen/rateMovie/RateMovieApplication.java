@@ -28,10 +28,22 @@ public class RateMovieApplication {
 	public <S> CommandLineRunner oneliner (GenreRepository genreRepo, MovieRepository movieRepo, RatingRepository rateRepo, UserRepository userRepo ) {
 		return (args) -> {
 			
-			User user1 = new User("John Doe", "pswd");
-			User user2 = new User("Jane Doe", "pswd2");
+			// pwsd = test
+			User user1 = new User("John Doe", "$2a$10$MlPPKBr4033nUemRZysCLOEp6kwkdPDzBuQ8cNruZA6Ta1T8SLYp6");
+			
+			// pwsd = test2
+			User user2 = new User("Jane Doe", "$2a$10$Yb7hbb6nmHrPh0S6PrHZjOwMkFEIM1bUBAh27b1KU56Lw1clmOkEC");
 			userRepo.save(user1);
 			userRepo.save(user2);
+			
+			// pwsd = testing
+			userRepo.save(new User("Test", "$2a$10$U/lHyMG1EElWW4Ksum2gterl/3bxEd6nrAaZ0NXJPi3Ofx5hHp09W"));
+			
+			// pswd = testing
+			userRepo.save(new User("Test2", "$2a$10$U/lHyMG1EElWW4Ksum2gterl/3bxEd6nrAaZ0NXJPi3Ofx5hHp09W"));
+			
+			// pswd = hallinto
+			userRepo.save(new User("admin", "$2a$10$JosU00F6aKVcsPCyZpPRwOUWlhaGz97mGv71mhtFY5vgtMiNHppu."));
 			
 			Genre horror = new Genre("Horror");
 			Genre fantasy = new Genre("Fantasy");

@@ -18,50 +18,44 @@ import lp.putkonen.rateMovie.domain.UserRepository;
 public class RatingController {
 
 	@Autowired
-	private RatingRepository rateRepo;
+	private RatingRepository ratingRepository;
 	
 	@Autowired
-	private UserRepository userRepo;
+	private UserRepository userRepository;
 	
 	@GetMapping("/api/ratings")
 	public @ResponseBody List<Rating> ratingApi(){	
-		return (List<Rating>) rateRepo.findAll();
+		return (List<Rating>) ratingRepository.findAll();
+	}
+		
+	@GetMapping("/rating/{id}")
+	public String testRate(@PathVariable("id") Long id, Model model) {
+		model.addAttribute("rating", new Rating());	
+		return null;
 	}
 	
 	@GetMapping("/rating")
 	public String index(Model model) {
-		model.addAttribute("ratings", rateRepo.findAll());
+		model.addAttribute("ratings", ratingRepository.findAll());
 		return "rating";
-	}
-	
-	@GetMapping("/rating/{id}")
-	public String testRate(@PathVariable("id") Long id, Model model) {
-		model.addAttribute("rating", new Rating());
-		
-		return null;
 	}
 	
 	@PostMapping("/rate")
 	public String rateMovie(Rating rating) {
 				
 		Rating tempRate = rating;
-		User user = userRepo.findById(1L).get();
+		User user = userRepository.findById(1L).get();
 
 		if(tempRate.getRatingId() != null) {
-			Rating realRate = rateRepo.findById(rating.getRatingId()).get();	
+			Rating realRate = ratingRepository.findById(rating.getRatingId()).get();	
 			realRate.setPoints(tempRate.getPoints());
 			realRate.setComment(tempRate.getComment());
-			rateRepo.save(realRate);
+			ratingRepository.save(realRate);
 		} else {
 			tempRate.setUser(user);
-			rateRepo.save(tempRate);
+			ratingRepository.save(tempRate);
 		}
-		
-
-		
-		System.out.println("\n\n\n " + rating + "\n\n\n");
-
-		
+						
 		return "redirect:/";
 		
 	}
