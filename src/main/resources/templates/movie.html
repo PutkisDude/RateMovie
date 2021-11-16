@@ -1,6 +1,17 @@
 <!DOCTYPE html>
 <html xmlns:th="http://www.thymeleaf.org">
 <head>
+    <link th:rel="stylesheet" th:href="@{/webjars/bootstrap/5.1.3/css/bootstrap.min.css} "/>
+	<link th:rel="stylesheet" th:href="@{/webjars/bootstrap-icons/1.7.0/font/bootstrap-icons.css}" />
+	<style>
+		h1 {
+			font-family:arial;
+		}
+		body {
+			padding: 10px;
+		}
+	</style>
+	<link th:rel="stylesheet" th:href="@{/css/style.css}" />
 <title>Rate Movie</title>
 </head>
 <body>
@@ -28,16 +39,18 @@
 		<input type="text" placeholder="comment" maxlength="50" th:field="*{comment}" /> <br />
 		<input type="submit" value="Rate" />
 	</form>
+	<br />
 	
 	<h2>Ratings</h2>
 	
-	<table>
-	<tr th:each="rating : ${movie.ratings}">
-	<td th:text=${rating.user.username}></td>
-	<td th:text=${rating.points}></td>
-	<td th:text=${rating.comment}></td>
-	</tr>
-	</table>
+	<ul class="list-group list-group-flush" th:each="rating : ${movie.ratings}">
+	<li class="list-group-item list-group-item-dark" th:text="${rating.user.username}"></li>
+	<li class="list-group-item" ><div th:switch="${rating.points}"><i th:each="i : ${#numbers.sequence(0, 4)}" th:class="${i} < ${rating.points} ? 'bi bi-star-fill' : 'bi bi-star'"></i>
+		</div></li>
+	<li class="list-group-item" th:text="'Comment: ' + ${rating.comment}"></li>
+	</ul>
+	
+
 
 </body>
 </html>
