@@ -37,6 +37,7 @@ public class Movie {
 			name="movie_genres",
 	joinColumns= @JoinColumn(name = "movie_id"),
 	inverseJoinColumns = @JoinColumn(name = "genre_id"))
+	@JsonIgnoreProperties("moviesGen")
 	private List<Genre> movieGenres = new ArrayList<Genre>();
 	
     

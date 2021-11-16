@@ -21,12 +21,13 @@
 		<label for="length">Length</label><br />
 		<input type="number" placeholder="minutes" th:field=*{length} />
 		<br />
-		
-		<input type="checkbox" name="genres"
-		th:each="genre : ${genres}"
-		th:text="${genre.name}"
-		value="${genre.id}"
-		th:field="*{movieGenres}" />
+		<ul>
+			<li th:each="genre : ${genres}">
+			<input type="checkbox" th:value="${genre.id}" name="genres" />
+			<label th:for="${genre.name}"  th:text="${genre.name}"></label>
+			
+		</ul>
+
 		<input type="submit" value="Save" /><br />
 	</form>
 	</div>
