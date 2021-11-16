@@ -4,6 +4,7 @@ import java.util.List;
 import java.util.Optional;
 
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.security.core.context.SecurityContextHolder;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.GetMapping;
@@ -49,7 +50,8 @@ public class MovieController {
 				page =  "nosuchmovie";
 			}else {
 				Movie movie = movieRepository.findById(movieId).get();
-				Optional<User> user = userRepository.findById((long) 1);
+				String auth =  SecurityContextHolder.getContext().getAuthentication().getName();
+				User user = userRepository.findByUsername(auth);
 				Rating rating;
 				
 				if(ratingRepository.existsByMovieAndUser(movie, user)) {

@@ -2,6 +2,7 @@ package lp.putkonen.rateMovie.web;
 
 import java.util.List;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.security.core.context.SecurityContextHolder;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.GetMapping;
@@ -44,7 +45,8 @@ public class RatingController {
 	public String rateMovie(Rating rating) {
 				
 		Rating tempRate = rating;
-		User user = userRepository.findById(1L).get();
+		String auth =  SecurityContextHolder.getContext().getAuthentication().getName();
+		User user = userRepository.findByUsername(auth);
 
 		if(tempRate.getRatingId() != null) {
 			Rating realRate = ratingRepository.findById(rating.getRatingId()).get();	

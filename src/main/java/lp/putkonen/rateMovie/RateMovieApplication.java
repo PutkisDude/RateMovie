@@ -13,6 +13,7 @@ import lp.putkonen.rateMovie.domain.Movie;
 import lp.putkonen.rateMovie.domain.MovieRepository;
 import lp.putkonen.rateMovie.domain.Rating;
 import lp.putkonen.rateMovie.domain.RatingRepository;
+import lp.putkonen.rateMovie.domain.Role;
 import lp.putkonen.rateMovie.domain.User;
 import lp.putkonen.rateMovie.domain.UserRepository;
 
@@ -43,7 +44,10 @@ public class RateMovieApplication {
 			userRepo.save(new User("Test2", "$2a$10$U/lHyMG1EElWW4Ksum2gterl/3bxEd6nrAaZ0NXJPi3Ofx5hHp09W"));
 			
 			// pswd = hallinto
-			userRepo.save(new User("admin", "$2a$10$JosU00F6aKVcsPCyZpPRwOUWlhaGz97mGv71mhtFY5vgtMiNHppu."));
+			userRepo.save(new User("Master", "$2a$10$JosU00F6aKVcsPCyZpPRwOUWlhaGz97mGv71mhtFY5vgtMiNHppu.", Role.ADMIN));
+			
+			// pswd = osaaja
+			userRepo.save(new User("Modaaja", "$2a$10$fBL5m5Fqq9BV0zuNnG6kj.HyRok3SONDgV91jGeba0R5GqvNLP5OC", Role.MOD));
 			
 			Genre horror = new Genre("Horror");
 			Genre fantasy = new Genre("Fantasy");
