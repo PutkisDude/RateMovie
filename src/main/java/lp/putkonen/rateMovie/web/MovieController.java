@@ -82,9 +82,8 @@ public class MovieController {
 		for(int genre : genress) {
 			movie.addGenre(genreRepository.findById((Long.valueOf(genre))).get());
 		}
-		movieRepository.save(movie);
-
 		
+		movieRepository.save(movie);
 		return "redirect:/";
 	}
 }
