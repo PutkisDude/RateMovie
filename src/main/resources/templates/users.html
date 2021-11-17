@@ -19,6 +19,7 @@
 		</tr>
 		<tr th:each="user : ${users}">
 		<td th:text="${user.username}"></td>
+		<td th:text="${user.role}"></td>
 		<td><a th:href="@{/deleteuser/{id}(id=${user.userId})}"><button class="btn btn-danger">Delete</button></a></td>
 		</tr>
 	</table>
