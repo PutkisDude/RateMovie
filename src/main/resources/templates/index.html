@@ -9,12 +9,31 @@
 <body>
 
 	<nav>
-	<a href="/genres" style="margin:15px; padding: 15px;">Genres</a>
-	<a href="/users">Users</a>
-	<a href="/logout" style="float: right; margin-right: 25px">Logout</a>
+		<div class="grid-container">
+		
+			<div class="grid-item1">
+				<a href="/genres"><button class="btn btn-secondary">Genres</button></a>
+				<a href="/users"><button class="btn btn-warning">Users</button></a>
+			</div>
+		
+			<div class="grid-item2">
+				<div sec:authorize="isAuthenticated()" >
+					<b th:inline="text" style="color:red">[[${#httpServletRequest.remoteUser}]]</b>
+					<form th:action="@{/logout}" method="POST"> 
+						<input class="btn btn-danger" type="submit" value="Logout"/>
+					</form>
+				</div>	
+				<div sec:authorize="!(isAuthenticated())">
+					<a href="./login"><button class="btn btn-dark">Login</button></a>
+				</div>
+			</div>
+			<div class="grid-item3">
+				<a href="/addmovie"><button class="btn btn-success">Add Movie</button></a>
+			</div>
+		</div>
+		
 	</nav>
 	
-	<a href="/addmovie"><button class="btn btn-success">Add Movie</button></a>
 
 	<table class="table">
 	<tr>

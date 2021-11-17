@@ -92,8 +92,6 @@ public class RateMovieApplication {
 
 			rateRepo.save(new Rating(user2, nightmareBefore, 5, "Awsum"));
 															
-	//		userRepo.deleteById((long) 1); // DELETE ALL RATINGS FROM USER
-	//		movieRepo.deleteById((long) 1); // DELETE ALL RATINGS FROM MOVIE
 			
 			log.info("SYSTEM UP AND RUNNING!");
 		};

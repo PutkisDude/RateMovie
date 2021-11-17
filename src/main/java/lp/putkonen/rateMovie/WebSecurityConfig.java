@@ -23,21 +23,18 @@ public class WebSecurityConfig extends WebSecurityConfigurerAdapter {
 	protected void configure(HttpSecurity http) throws Exception {
 		http
 			.authorizeRequests()
-			.antMatchers("/css/**", "/webjars/**", "/api/*" ,"/h2-console/**").permitAll()
+			.antMatchers("/css/**", "/", "/webjars/**", "/api/**" ,"/h2-console/**").permitAll()
 			.and()
 			.authorizeRequests()
 			.anyRequest().authenticated()
 			.and()
 		.formLogin()
+			.loginPage("/login")
 			.defaultSuccessUrl("/", true)
 			.permitAll()
 			.and()
 		.logout().permitAll();
 		
- //       http.csrf().disable();
- //       http.headers().frameOptions().disable();
-        
-        // POISTA H2 ja 2 vikaa riviä ennen julkaisua
 	}
 	
 	@Autowired

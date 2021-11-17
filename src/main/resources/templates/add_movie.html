@@ -21,7 +21,7 @@
 		<label for="length">Length</label><br />
 		<input type="number" placeholder="minutes" th:field=*{length} />
 		<br />
-		<ul>
+		<ul class="genrelist">
 			<li th:each="genre : ${genres}">
 			<input type="checkbox" th:value="${genre.id}" name="genres" />
 			<label th:for="${genre.name}"  th:text="${genre.name}"></label>

@@ -10,7 +10,7 @@ public interface MovieRepository extends CrudRepository<Movie, Long> {
 	
 	public List<Movie> findByTitleContainingIgnoreCase(String title);
 	
-	// Custom Query for avg and count functions
+	// Custom Query for avg and count
 	
 	@Query(value = "SELECT ID, TITLE, LENGTH, YEAR, AVG(CAST(points AS FLOAT)) AS AVG_RATING, COUNT(POINTS) AS RATE_COUNT "
 			+ "FROM MOVIE "

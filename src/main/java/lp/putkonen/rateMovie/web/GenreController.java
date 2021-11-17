@@ -1,6 +1,7 @@
 package lp.putkonen.rateMovie.web;
 
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.security.access.prepost.PreAuthorize;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.GetMapping;
@@ -11,6 +12,7 @@ import lp.putkonen.rateMovie.domain.Genre;
 import lp.putkonen.rateMovie.domain.GenreRepository;
 
 @Controller
+@PreAuthorize("hasAuthority('ADMIN')")
 public class GenreController {
 	
 	@Autowired
