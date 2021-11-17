@@ -26,11 +26,7 @@ public class Genre {
 	
 	@ManyToMany(mappedBy="movieGenres", fetch = FetchType.LAZY)
 	private List<Movie> moviesGen = new ArrayList<Movie>();
-	
-	public void moviesGen(Movie movie) {
-		moviesGen.add(movie);
-	}
-	
+		
 	public Genre() {
 	}
 
