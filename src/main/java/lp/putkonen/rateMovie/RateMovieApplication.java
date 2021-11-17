@@ -33,7 +33,7 @@ public class RateMovieApplication {
 			User user1 = new User("John Doe", "$2a$10$MlPPKBr4033nUemRZysCLOEp6kwkdPDzBuQ8cNruZA6Ta1T8SLYp6");
 			
 			// pwsd = test2
-			User user2 = new User("Jane Doe", "$2a$10$Yb7hbb6nmHrPh0S6PrHZjOwMkFEIM1bUBAh27b1KU56Lw1clmOkEC");
+			User user2 = new User("Jane Doe", "$2a$10$Yb7hbb6nmHrPh0S6PrHZjOwMkFEIM1bUBAh27b1KU56Lw1clmOkEC", Role.MOD);
 			userRepo.save(user1);
 			userRepo.save(user2);
 			
@@ -91,8 +91,8 @@ public class RateMovieApplication {
 			rateRepo.save(new Rating(user1, nightmareBefore, 5, "Awsum"));
 
 			rateRepo.save(new Rating(user2, nightmareBefore, 5, "Awsum"));
-															
 			
+
 			log.info("SYSTEM UP AND RUNNING!");
 		};
 	}
