@@ -9,13 +9,14 @@
 <body>
 
 	<nav>
-	<a href="/">Back to index</a>
+		<a href="/">Back to index</a>
 	</nav>
 
 	<table class="table table-bordered" style="margin:20px">
 		<tr>
 		<th>Username</th>
-		<th>Del</th>
+		<th>Role</th>
+		<th></th>
 		</tr>
 		<tr th:each="user : ${users}">
 		<td th:text="${user.username}"></td>

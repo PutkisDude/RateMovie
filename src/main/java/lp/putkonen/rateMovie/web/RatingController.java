@@ -1,11 +1,11 @@
 package lp.putkonen.rateMovie.web;
 
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.security.access.prepost.PreAuthorize;
 import org.springframework.security.core.context.SecurityContextHolder;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.GetMapping;
-import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.PostMapping;
 import lp.putkonen.rateMovie.domain.Rating;
 import lp.putkonen.rateMovie.domain.RatingRepository;
@@ -21,12 +21,6 @@ public class RatingController {
 	@Autowired
 	private UserRepository userRepository;
 	
-
-	@GetMapping("/rating/{id}")
-	public String testRate(@PathVariable("id") Long id, Model model) {
-		model.addAttribute("rating", new Rating());	
-		return null;
-	}
 	
 	@GetMapping("/rating")
 	public String index(Model model) {
@@ -34,6 +28,7 @@ public class RatingController {
 		return "rating";
 	}
 	
+	@PreAuthorize("isAuthenticated()")  
 	@PostMapping("/rate")
 	public String rateMovie(Rating rating) {
 				

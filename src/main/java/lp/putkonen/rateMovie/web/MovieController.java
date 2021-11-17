@@ -2,6 +2,7 @@ package lp.putkonen.rateMovie.web;
 
 import java.util.List;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.security.access.prepost.PreAuthorize;
 import org.springframework.security.core.context.SecurityContextHolder;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
@@ -52,17 +53,12 @@ public class MovieController {
 				Movie movie = movieRepository.findById(movieId).get();
 				String auth =  SecurityContextHolder.getContext().getAuthentication().getName();
 				User user = userRepository.findByUsername(auth);
-				Rating rating;
-				
+				Rating rating;				
 				if(ratingRepository.existsByMovieAndUser(movie, user)) {
 					 rating = ratingRepository.findByMovieAndUser(movie, user);
-
 				}else {
 					 rating = new Rating(movie);
 				}
-
-				System.out.println("\n\n\n " + rating + "\n\n\n");
-
 				model.addAttribute("movie", movie);
 				model.addAttribute("rate", rating);
 				page = "movie";
@@ -70,6 +66,7 @@ public class MovieController {
 		return page;
 	}
 	
+	@PreAuthorize("hasAnyAuthority('ADMIN', 'MOD')")
 	@GetMapping("/addmovie")
 	public String addMovie(Model model) {
 		model.addAttribute("movie", new Movie());
@@ -78,6 +75,7 @@ public class MovieController {
 		return "add_movie";
 	}
 	
+	@PreAuthorize("hasAnyAuthority('ADMIN', 'MOD')")
 	@PostMapping("/savemovie")
 	public String saveMovie(Movie movie, @RequestParam(value = "genres", required = false) int[] genress, BindingResult bindingresult, Model model) {
 		
