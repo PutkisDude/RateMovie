@@ -10,6 +10,7 @@ import org.springframework.web.bind.annotation.PostMapping;
 
 import lp.putkonen.rateMovie.domain.Genre;
 import lp.putkonen.rateMovie.domain.GenreRepository;
+import lp.putkonen.rateMovie.domain.MovieRepository;
 
 @Controller
 @PreAuthorize("hasAuthority('ADMIN')")
@@ -17,6 +18,9 @@ public class GenreController {
 	
 	@Autowired
 	GenreRepository genreRepository;
+	
+	@Autowired
+	MovieRepository movieRepository;
 
 	@GetMapping("/genres")
 	public String genreList(Model model) {
@@ -35,7 +39,7 @@ public class GenreController {
 		model.addAttribute("genre", genreRepository.findById(genreId)); 
 		return "add_genre"; 
 		}
-	  
+	
 	@PostMapping("/savegenre") public String saveGenre(Genre genre) {
 		genreRepository.save(genre); 
 		return "redirect:genres"; 
