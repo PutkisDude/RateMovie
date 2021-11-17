@@ -11,7 +11,7 @@
 	<nav>
 		<div class="grid-container">
 		
-			<div class="grid-item1">
+			<div class="grid-item1" sec:authorize="hasAuthority('ADMIN')">
 				<a href="/genres"><button class="btn btn-secondary">Genres</button></a>
 				<a href="/users"><button class="btn btn-warning">Users</button></a>
 			</div>

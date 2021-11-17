@@ -26,9 +26,11 @@ a:hover {
 }
 
 .grid-item2 {
+	grid-column-start:3;
 	text-align:right;
 	padding-top:10px;
-	padding-right:15px;
+	padding-right:20px;
+	padding-bottom:15px;
 }
 
 .grid-item2 form {
