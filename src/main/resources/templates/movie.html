@@ -15,8 +15,12 @@
 <title>Rate Movie</title>
 </head>
 <body>
-	<a href="/">Back to index</a>
-	<h1 th:text=${movie.title}></h1>
+	<a href="/">Back to index</a><br />
+	<h1 style="display:inline" th:text=${movie.title}></h1>
+	<span sec:authorize="hasAuthority('ADMIN')">
+		<a th:href="@{/editmovie/{id}(id=${movie.movieId})}"><button style="margin-left:20px" class="btn btn-warning btn-sm">Edit</button></a>
+		<a th:href="@{/deletemovie/{id}(id=${movie.movieId})}"><button style="margin-left: 10px;" class="btn btn-danger btn-sm">Delete</button></a>
+	</span>
 	<ul>
 		<li th:text="'Year - ' + ${movie.year}"></li>
 		<li th:text="'Length - ' + ${movie.getLengthInHoursAndMinutes} "></li>
@@ -41,6 +45,8 @@
 		</form>
 	</div>
 	<br />
+	
+	
 	
 	<h2>Ratings</h2>
 	

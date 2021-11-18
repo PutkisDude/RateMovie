@@ -117,7 +117,7 @@ public class Movie {
 		this.ratings = ratings;
 	}
 
-	public void setLength(int length) {
+	public void setLength(int length) throws Exception {
 		this.length = length;
 	}
 	

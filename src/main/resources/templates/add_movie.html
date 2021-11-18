@@ -12,7 +12,7 @@
 
 	<div class="form-group">
 	<form th:action="@{/savemovie}" th:object=${movie} method="POST" style="margin:20px">
-		<input th:if="${id != null}" type="hidden" th:field=*${id} readonly />
+		<input th:if="${id != null}" type="hidden" th:field=*{movieId} readonly />
 		<label for="title">Title</label><br />
 		<input type="text" th:field="*{title}" placeholder="title" required /> <br />
 		<label for="year">Year</label><br />

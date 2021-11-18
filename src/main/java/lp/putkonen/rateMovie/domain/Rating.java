@@ -11,9 +11,10 @@ import javax.persistence.ManyToOne;
 import javax.persistence.Table;
 import javax.persistence.Temporal;
 import javax.persistence.TemporalType;
+import javax.validation.constraints.Max;
+import javax.validation.constraints.Min;
 
 import org.hibernate.annotations.CreationTimestamp;
-
 import com.fasterxml.jackson.annotation.JsonIgnoreProperties;
 
 
@@ -24,6 +25,9 @@ public class Rating {
 	@Id
 	@GeneratedValue(strategy=GenerationType.IDENTITY)
 	private Long ratingId;
+	
+	@Min(1)
+	@Max(5)
 	private int points;
 	private String comment;
 	

@@ -36,14 +36,16 @@ public class MovieController {
 	@Autowired
 	private RatingRepository ratingRepository;
 	
-	@GetMapping("/")
+	// Index page
+	@GetMapping("/") 
 	public String movies(Model model) {
 		movieRepository.updateRatings();
 		model.addAttribute("movies", movieRepository.findAll());
 		return "index";
 	}
 
-	@GetMapping("/movie/{id}")
+	// Open page for movie - Add Movie and all ratings - Logged user can rate in that page
+	@GetMapping("/movie/{id}")	
 	public String moviePage(@PathVariable("id") Long movieId, Model model) {
 		String page = "";
 		
@@ -66,7 +68,8 @@ public class MovieController {
 		return page;
 	}
 	
-	@PreAuthorize("hasAnyAuthority('ADMIN', 'MOD')")
+	// Add new movie
+	@PreAuthorize("hasAnyAuthority('ADMIN', 'MOD')") 
 	@GetMapping("/addmovie")
 	public String addMovie(Model model) {
 		model.addAttribute("movie", new Movie());
@@ -75,14 +78,40 @@ public class MovieController {
 		return "add_movie";
 	}
 	
-	@PreAuthorize("hasAnyAuthority('ADMIN', 'MOD')")
-	@PostMapping("/savemovie")
-	public String saveMovie(Movie movie, @RequestParam(value = "genres", required = false) int[] genress, BindingResult bindingresult, Model model) {
-		
-		for(int genre : genress) {
-			movie.addGenre(genreRepository.findById((Long.valueOf(genre))).get());
+	// Edit a movie
+	
+	@PreAuthorize("hasAnyAuthority('ADMIN', 'MOD')") 
+	@GetMapping("/editmovie/{id}")
+	public String editMovie(Model model, @PathVariable("id") Long id) {
+		model.addAttribute("movie", movieRepository.findById(id));
+		List<Genre> allGenres = (List<Genre>) genreRepository.findAll();
+		model.addAttribute("genres", allGenres);
+		return "add_movie";
+	}
+	
+	// Delete movie
+	
+	@PreAuthorize("hasAuthority('ADMIN')")
+	@GetMapping("/deletemovie/{id}")
+	public String deleteMovie(@PathVariable("id") Long id) {
+		if(movieRepository.existsById(id)) {
+			movieRepository.deleteById(id);
 		}
+		return "redirect:/";
+	}
+	
+	// Save a movie. Genres in array = Loop
+	
+	@PreAuthorize("hasAnyAuthority('ADMIN', 'MOD')") 
+	@PostMapping("/savemovie")
+	public String saveMovie(Movie movie, @RequestParam(value = "genres", required = false) int[] genress, BindingResult bindingresult, Model model)  throws NumberFormatException{
 		
+		
+		if(genress != null) {
+			for(int genre : genress) {
+				movie.addGenre(genreRepository.findById((Long.valueOf(genre))).get());
+			}
+		}
 		movieRepository.save(movie);
 		return "redirect:/";
 	}

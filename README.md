@@ -18,7 +18,7 @@
 	- ManyToMany/ManyToOne database tables
 	- H2 Database
 	- JPA Custom Query (MovieRepository)
-	- Cascade (User.class -> When User removed -> Ratings from user removed) 
+	- Cascade (User.class = When User removed -> Ratings from user removed) 
  
 # Spring Boot Rest
  	- All RestControllers
