@@ -15,7 +15,12 @@ a:hover {
 .grid-container {
   display: grid;
   grid-template-columns: auto auto auto;
-  
+
+}
+
+.grid-topic {
+	display:inline;
+	margin-right:10px;
 }
 
 .grid-item1 {
@@ -40,8 +45,8 @@ a:hover {
 .grid-item3 {
 	grid-column-start: 1;
   	grid-column-end: 4;
-  	padding-top:10px;
-	padding-left:15px;
+	padding-left:10px;
+	padding-bottom:5px;
 }
 
 .genrelist {
