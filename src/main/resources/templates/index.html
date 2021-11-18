@@ -11,10 +11,10 @@
 	<nav>
 		<div class="grid-container">
 		
-			<div class="grid-item1" sec:authorize="hasAuthority('ADMIN')">
+			<div class="grid-item1">
 				<h2 class="grid-topic">Rate Movies</h2>
-				<a href="/genres"><button class="btn btn-secondary btn-sm">Genres</button></a>
-				<a href="/users"><button class="btn btn-warning btn-sm">Users</button></a>
+				<a href="/genres" sec:authorize="hasAuthority('ADMIN')"><button class="btn btn-secondary btn-sm">Genres</button></a>
+				<a href="/users" sec:authorize="hasAuthority('ADMIN')"><button class="btn btn-warning btn-sm">Users</button></a>
 			</div>
 		
 			<div class="grid-item2">
